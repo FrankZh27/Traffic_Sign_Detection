@@ -1,0 +1,23 @@
+imgPath = '/Users/wyp/Desktop/442/pro/stopsigncut';       
+imgDir  = dir(fullfile(imgPath, '*.jpg')); 
+j = 1;
+for i = 1:length(imgDir)        
+    img = imread(fullfile(imgPath, imgDir(i).name));
+    image1 = imresize(img, [100, 100]);
+    for i = 1 : 5
+        A = [image1(:,i + 1:end, :), 255 * ones(100,i,3)];
+        B = [255 * ones(100,i, 3), image1(:,i + 1:end, :)];
+        n = size(image1(i:end,:));
+        m = size(255 * ones(i,100));
+        C = [image1(i + 1:end,:,:); 255 * ones(i,100,3)];
+        D = [255 * ones(i,100,3); image1(i + 1:end,:,:)];
+        imwrite(A, strcat('pic_',num2str(j), '.jpg'));
+        j = j + 1;
+         imwrite(B, strcat('pic_',num2str(j), '.jpg'));
+        j = j + 1;
+         imwrite(C, strcat('pic_',num2str(j), '.jpg'));
+        j = j + 1;
+         imwrite(D, strcat('pic_',num2str(j), '.jpg'));
+        j = j + 1;
+    end
+end
